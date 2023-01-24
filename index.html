@@ -9,17 +9,22 @@
   </head>
   <body>
     <div class="game-intro">
-      <img src="./images/logo.png" alt="" class="logo-img" />
-      <br />
-      <button id="start-button">StartGame</button>
-      <p>USE "WASD" to control your Marvel Superhero!</p>
-      <img src="./images/arrows.png" alt="" class="arrows-img" />
+      <div><button id="start-button">Let's Go!</button></div>
+      <div><img src="./images/wasd.png" alt="" class="wasd-img" /></div>
+      <p>USE <span>"WASD"</span> to control your Marvel Superhero!</p>
     </div>
 
     <div id="game-board">
-      <canvas id="canvas" width="1880" height="800"></canvas>
+      <canvas id="canvas"></canvas>
+      <div class="buttons">
+        <button id="restart-button">restart</button>
+        <button id="pause-button">pause</button>
+        <button id="mute-button">mute</button>
+      </div>
     </div>
-
     <script type="text/javascript" src="js/index.js"></script>
   </body>
+  <audio controls>
+    <source src="music/AlanSilv.mp3" type="audio/ogg">
+  </audio>
 </html>

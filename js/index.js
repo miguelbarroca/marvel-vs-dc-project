@@ -1,7 +1,11 @@
 const myCanvas = document.querySelector('Canvas')
 const ctx = myCanvas.getContext('2d');
 document.querySelector("#game-board").style.display = "none"
-myCanvas.style.border = "2px solid black"
+myCanvas.width = 1880; 
+myCanvas.height = 750;
+let score = 0;
+pause = false;
+// ------------------- RANDOMIZER
 const getRandomSpawn = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -14,14 +18,15 @@ const backImg2 = new Image();
 backImg2.src = "../images/background.jpg";
 let background1X = 0;
 let background2X = -myCanvas.width; 
-// -------------------------- Car IMG (properties)
+
+// -------------------------- CHAR IMG (properties)
 const charImg = new Image();
-charImg.src = "../images/captainamerica.png";
+charImg.src = "../images/spiderman.png";
 let charPosX = 50;
 let charPosY = myCanvas.height/2 - 30;
-let charWidth = 100;
-let charHeight = 150;
-const charSpeed = 6;
+let charWidth = 80;
+let charHeight = 130;
+const charSpeed = 8;
 let isMovingLeft = false
 let isMovingRight = false
 let isMovingUp = false
@@ -32,15 +37,15 @@ const aquamanImg = new Image();
 aquamanImg.src = "../images/aquaman.png"
 let aquamanPosX = 2000;
 let aquamanPosY = 100;
-let aquamanWidth = 150;
-let aquamanHeight = 100;
+let aquamanWidth = 170;
+let aquamanHeight = 120;
 
 const batmanImg = new Image();
 batmanImg.src = "../images/batman.png"
 let batmanPosX = 2200;
 let batmanPosY = 280;
 let batmanWidth = 150;
-let batmanHeight = 90;
+let batmanHeight = 100;
 
 const flashImg = new Image();
 flashImg.src = "../images/flash.png"
@@ -66,10 +71,15 @@ let wonderwomanHeight = 80;
 const thanosImg = new Image();
 thanosImg.src = "../images/thanosgauntlet.png"
 let thanosPosX = 2400;
-let thanosPosY = 1;
-let thanosWidth = 150;
-let thanosHeight = 100;
+let thanosPosY = myCanvas.height /2;
+let thanosWidth = 130;
+let thanosHeight = 90;
 
+function drawScore() {
+  ctx.font = "16px Fira Code";
+  ctx.fillStyle = "#B22222";
+  ctx.fillText("Score: "+score, myCanvas.width / 2, 50);
+}
 
 
 
@@ -107,9 +117,7 @@ const drawthanos = () => {
   ctx.drawImage(thanosImg, thanosPosX, thanosPosY, thanosWidth, thanosHeight);
 }
 
-// ------------------------------ RANDOMIZER 
-
-
+// ---------------------- WINDOW ON.LOAD
 
 window.onload = () => {
   document.getElementById('start-button').onclick = () => {
@@ -128,13 +136,14 @@ function animate(){
   drawsuperman();
   drawwonderwoman();
   drawthanos();
+  drawScore()
 
-  aquamanPosX -= 10;
-  batmanPosX -= 10;
-  flashPosX -= 12;
-  supermanPosX -= 12;
-  wonderwomanPosX -= 10;
-  thanosPosX -= 18;
+  aquamanPosX -= 11;
+  batmanPosX -= 11;
+  flashPosX -= 13;
+  supermanPosX -= 13;
+  wonderwomanPosX -= 11;
+  thanosPosX -= 17;
 
 
   background1X -= 3;  
@@ -160,66 +169,80 @@ function animate(){
   if (isMovingDown) {
     charPosY += charSpeed
   }
+  if ( charPosX === -myCanvas.width) {
+    charSpeed === 0;
+  }
 // -------------------- EnemiesSPAWN && Collision -------------------
 if (aquamanPosX < -200){
   aquamanPosX = 1800;
-  aquamanPosY = getRandomSpawn(1000, 50)
+  aquamanPosY = getRandomSpawn(700, 1)
 }  
 if (batmanPosX < -300){
   batmanPosX = 1800;
-  batmanPosY = getRandomSpawn(1000, 50)
+  batmanPosY = getRandomSpawn(700, 1)
 }
 if (flashPosX < -400){
   flashPosX = 1800;
-  flashPosY = getRandomSpawn(1000, 50)
+  flashPosY = getRandomSpawn(700, 1)
 }
-if (supermanPosX < 500){
+if (supermanPosX < -700){
   supermanPosX = 1800;
-  supermanPosY = getRandomSpawn(1000, 50)
+  supermanPosY = getRandomSpawn(700, 1)
 }
 if (wonderwomanPosX < -200){
     wonderwomanPosX = 1800;
-    wonderwomanPosY = getRandomSpawn(1000, 50)
+    wonderwomanPosY = getRandomSpawn(700, 1)
 }
 if (thanosPosX < -200){
   thanosPosX = 1800;
-  thanosPosY = getRandomSpawn(1000, 50)
+  thanosPosY = getRandomSpawn(700, 1)
 }
 
-if (aquamanPosX < charPosX + charWidth &&
-  aquamanPosX + aquamanWidth > charPosX &&
-  aquamanPosY < charPosY + charHeight &&
-  aquamanHeight + aquamanPosY > charPosY) {
+if (aquamanPosX < charPosX + charWidth -45&&
+  aquamanPosX + aquamanWidth > charPosX  &&
+  aquamanPosY < charPosY + charHeight -50&&
+  aquamanHeight -50 + aquamanPosY > charPosY) {
   gameOver = true;
 } 
-if (batmanPosX < charPosX + charWidth &&
+if (batmanPosX < charPosX + charWidth -45&&
   batmanPosX + batmanWidth > charPosX &&
   batmanPosY < charPosY + charHeight &&
-  batmanHeight + batmanPosY > charPosY) {
+  batmanHeight -50 + batmanPosY > charPosY) {
     gameOver = true;
 }
-if (flashPosX < charPosX + charWidth &&
+if (flashPosX < charPosX + charWidth -45 &&
   flashPosX + flashWidth > charPosX &&
   flashPosY < charPosY + charHeight &&
-  flashHeight + flashPosY > charPosY) {
+  flashHeight -50 + flashPosY > charPosY) {
   gameOver = true;
 }
-if (supermanPosX < charPosX + charWidth &&
+if (supermanPosX < charPosX + charWidth -45&&
     supermanPosX + supermanWidth > charPosX &&
     supermanPosY < charPosY + charHeight &&
-    supermanHeight + supermanPosY > charPosY) {
+    supermanHeight -50 + supermanPosY > charPosY) {
     gameOver = true;
 }
-if (wonderwomanPosX < charPosX + charWidth &&
+if (wonderwomanPosX < charPosX + charWidth -45&&
     wonderwomanPosX + wonderwomanWidth > charPosX &&
     wonderwomanPosY < charPosY + charHeight &&
-    wonderwomanHeight + wonderwomanPosY > charPosY) {
+    wonderwomanHeight -50 + wonderwomanPosY > charPosY) {
     gameOver = true; 
 }
+if (thanosPosX < charPosX + charWidth -50&&
+  thanosPosX + thanosWidth > charPosX &&
+  thanosPosY < charPosY + charHeight &&
+  thanosHeight -50 + thanosPosY > charPosY) {
+  gameOver = true;
+  } 
+
+  if (aquamanPosX < charPosX)  {
+    score += 1;
+  }
 // --------------------GAME OVER -----------------------------------
   if (!gameOver){
     animateId = requestAnimationFrame(animate)
-  } else {
+  } 
+  else {
     cancelAnimationFrame(animateId)
   }
 }
@@ -234,30 +257,41 @@ if (wonderwomanPosX < charPosX + charWidth &&
   }
   document.addEventListener('keypress', event => {
     if (event.key === 'a') {
-      // move paddle to the left
+     
       isMovingLeft = true
     }
     if (event.key === 'd') {
-      // move paddle to the right
+      
       isMovingRight = true
     } 
     if (event.key === 'd') {
-      // move paddle to the right
+      
       isMovingRight = true
     }
     if (event.key === 'w') {
-      // move paddle to the right
+      
       isMovingUp = true
     }
     if (event.key === 's') {
-      // move paddle to the right
+      
       isMovingDown = true
     }
   })
+
   document.addEventListener('keyup', () => {
-    // Stop moving the paddle
     isMovingLeft = false
     isMovingRight = false
     isMovingUp = false
     isMovingDown = false
 });
+
+document.getElementById('pause-button').onclick = () => {
+  if(!pause) {
+  cancelAnimationFrame(animateId);
+}
+if(pause) {
+  animateId = requestAnimationFrame(animate)
+}
+}
+
+

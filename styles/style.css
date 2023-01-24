@@ -1,47 +1,91 @@
 body {
     padding: 0;
-    text-align: center;
-  }
-  
-  .game-intro {
-    float: left;
-    padding: 0% 10%;
+    text-align: center; 
+    background-color: black ;
   }
   
   .game-intro p {
     font-size: 18px;
-    font-family: "Verdana"
+    font-weight: 500;
+    font-family: "Fira Code";
+    color: white;
+  }
+
+  .game-intro span {
+    color: red
   }
   
-  .logo-img {
-    width: 350px;
+  .wasd-img {
+    width: 200px;
+    resize: both;
   }
   
-  .arrows-img {
-    width: 150px;
+  .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 5%;
   }
-  
-  body button {
-    font-size: 30px;
-    background-color: #870007;
+
+  #start-button {
+    font-size: 50px;
+    background-color: red;
     color: #fff;
-    padding: 20px 40px;
+    padding: 10px 30px;
+    border: 0;
+    box-shadow: 0;
+    margin-top: 250px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-family: 'Fira Code';
+  }
+  
+  
+
+  #restart-button {
+    font-size: 35px;
+    background-color: red;
+    color: #fff;
+    padding: 5px 10px;
+    margin-top: 10px;
     border: 0;
     box-shadow: 0;
     border-radius: 5px;
-    margin-bottom: 20px;
+    font-family: 'Fira Code';
+  }
+
+  #mute-button {
+    font-size: 35px;
+    background-color: red;
+    color: #fff;
+    padding: 5px 10px;
+    margin-top: 10px;
+    border: 0;
+    box-shadow: 0;
+    border-radius: 5px;
+    font-family: 'Fira Code';
+  }
+
+  #pause-button {
+    font-size: 35px;
+    background-color: red;
+    color: #fff;
+    padding: 5px 10px;
+    margin-top: 10px;
+    border: 0;
+    box-shadow: 0;
+    border-radius: 5px;
+    font-family: 'Fira Code';
   }
   
   #game-board {
       float: left;
-      padding: 20px 0px;
+      padding: 10px 0px;
   }
 
   .game-intro {
-    background-image: url("https://www.google.com/url?sa=i&url=https%3A%2F%2Fanimaders.com%2Fd-c-vs-marvel%2F&psig=AOvVaw00VVk7QdxDhSBrUq_iQ-n6&ust=1674560273838000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCIDupqTN3fwCFQAAAAAdAAAAABAF");
     display: flex;
-    align-items: center;
+    display: block;
     justify-content: center;
-    flex-direction: column;
-    border: 2px solid;
+
   }
+  
