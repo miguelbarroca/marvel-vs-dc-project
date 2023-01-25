@@ -47,7 +47,7 @@ let isMovingDown = false
 
 // ------------------------------- Enemies
 const aquamanImg = new Image();
-aquamanImg.src = "./images/aquaman.png"
+aquamanImg.src = "images/aquaman.png"
 let aquamanPosX = 2000;
 let aquamanPosY = 100;
 let aquamanWidth = 150;
