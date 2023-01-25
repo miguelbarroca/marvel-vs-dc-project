@@ -47,7 +47,7 @@ let isMovingDown = false
 
 // ------------------------------- Enemies
 const aquamanImg = new Image();
-aquamanImg.src = "../images/aquaman.png"
+aquamanImg.src = "./images/aquaman.png"
 let aquamanPosX = 2000;
 let aquamanPosY = 100;
 let aquamanWidth = 150;
@@ -55,7 +55,7 @@ let aquamanHeight = 100;
 let aquamanSpeed = 10;
 
 const batmanImg = new Image();
-batmanImg.src = "../images/batman.png"
+batmanImg.src = "./images/batman.png"
 let batmanPosX = 2200;
 let batmanPosY = 280;
 let batmanWidth = 130;
@@ -63,7 +63,7 @@ let batmanHeight = 80;
 let batmanSpeed = 10;
 
 const flashImg = new Image();
-flashImg.src = "../images/flash.png"
+flashImg.src = "./images/flash.png"
 let flashPosX = 2200;
 let flashPosY = -380;
 let flashWidth = 120;
@@ -71,7 +71,7 @@ let flashHeight = 100;
 let flashSpeed = 10;
 
 const supermanImg = new Image();
-supermanImg.src = "../images/superman.png"
+supermanImg.src = "./images/superman.png"
 let supermanPosX = 2300;
 let supermanPosY = -380;
 let supermanWidth = 150;
@@ -79,7 +79,7 @@ let supermanHeight = 100;
 let supermanSpeed = 10;
 
 const wonderwomanImg = new Image();
-wonderwomanImg.src = "../images/wonderwoman.png"
+wonderwomanImg.src = "./images/wonderwoman.png"
 let wonderwomanPosX = 2400;
 let wonderwomanPosY = -380;
 let wonderwomanWidth = 130;
@@ -87,7 +87,7 @@ let wonderwomanHeight = 60;
 let wonderwomanSpeed = 10;
 
 const thanosImg = new Image();
-thanosImg.src = "../images/thanosgauntlet.png"
+thanosImg.src = "./images/thanosgauntlet.png"
 let thanosPosX = 2400;
 let thanosPosY = myCanvas.height /2;
 let thanosWidth = 100;
@@ -95,7 +95,7 @@ let thanosHeight = 90;
 let thanosSpeed = 10;
 
 const gameoverImg = new Image();
-gameoverImg.src = "../images/gameover.jpg"
+gameoverImg.src = "./images/gameover.jpg"
 
 // ----------------------- DRAWING CHARACTERS 
 const char = () => {
