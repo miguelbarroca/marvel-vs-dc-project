@@ -33,7 +33,6 @@ body {
     padding: 10px 30px;
     border: 0;
     box-shadow: 0;
-    margin-top: 250px;
     border-radius: 5px;
     margin-bottom: 10px;
     font-family: 'Fira Code';
@@ -42,18 +41,6 @@ body {
   
 
   #restart-button {
-    font-size: 35px;
-    background-color: red;
-    color: #fff;
-    padding: 5px 10px;
-    margin-top: 10px;
-    border: 0;
-    box-shadow: 0;
-    border-radius: 5px;
-    font-family: 'Fira Code';
-  }
-
-  #mute-button {
     font-size: 35px;
     background-color: red;
     color: #fff;
@@ -89,3 +76,7 @@ body {
 
   }
   
+  #deadpool {
+    margin-top: 50px;
+    margin-bottom: 15px;
+  }

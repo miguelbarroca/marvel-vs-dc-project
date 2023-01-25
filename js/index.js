@@ -4,13 +4,21 @@ document.querySelector("#game-board").style.display = "none"
 myCanvas.width = 1880; 
 myCanvas.height = 750;
 let score = 0;
-pause = false;
+let pause = false;
+let gameOver = false;
+let animateId 
+let introMusic = new Audio("../music/intromusic.wav");
+introMusic.volume = 0.5
+let gameMusic = new Audio("../music/streetsofrage.mp3");
+gameMusic.volume = 0.2
+
 // ------------------- RANDOMIZER
 const getRandomSpawn = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
 // --------------------------Background IMG (properties)
 const backImg = new Image();
 backImg.src = "../images/background.jpg";
@@ -18,14 +26,19 @@ const backImg2 = new Image();
 backImg2.src = "../images/background.jpg";
 let background1X = 0;
 let background2X = -myCanvas.width; 
+const backgroundImgs = () => {
+  ctx.drawImage(backImg2, background1X, 0, myCanvas.width, myCanvas.height);
+  ctx.drawImage(backImg2, background2X, 0, myCanvas.width, myCanvas.height);
+  
+} 
 
 // -------------------------- CHAR IMG (properties)
 const charImg = new Image();
 charImg.src = "../images/spiderman.png";
 let charPosX = 50;
 let charPosY = myCanvas.height/2 - 30;
-let charWidth = 80;
-let charHeight = 130;
+let charWidth = 60;
+let charHeight = 110;
 const charSpeed = 8;
 let isMovingLeft = false
 let isMovingRight = false
@@ -37,67 +50,57 @@ const aquamanImg = new Image();
 aquamanImg.src = "../images/aquaman.png"
 let aquamanPosX = 2000;
 let aquamanPosY = 100;
-let aquamanWidth = 170;
-let aquamanHeight = 120;
+let aquamanWidth = 150;
+let aquamanHeight = 100;
+let aquamanSpeed = 10;
 
 const batmanImg = new Image();
 batmanImg.src = "../images/batman.png"
 let batmanPosX = 2200;
 let batmanPosY = 280;
-let batmanWidth = 150;
-let batmanHeight = 100;
+let batmanWidth = 130;
+let batmanHeight = 80;
+let batmanSpeed = 10;
 
 const flashImg = new Image();
 flashImg.src = "../images/flash.png"
 let flashPosX = 2200;
 let flashPosY = -380;
-let flashWidth = 150;
-let flashHeight = 120;
+let flashWidth = 120;
+let flashHeight = 100;
+let flashSpeed = 10;
 
 const supermanImg = new Image();
 supermanImg.src = "../images/superman.png"
 let supermanPosX = 2300;
 let supermanPosY = -380;
-let supermanWidth = 170;
-let supermanHeight = 120;
+let supermanWidth = 150;
+let supermanHeight = 100;
+let supermanSpeed = 10;
 
 const wonderwomanImg = new Image();
 wonderwomanImg.src = "../images/wonderwoman.png"
 let wonderwomanPosX = 2400;
 let wonderwomanPosY = -380;
-let wonderwomanWidth = 150;
-let wonderwomanHeight = 80;
+let wonderwomanWidth = 130;
+let wonderwomanHeight = 60;
+let wonderwomanSpeed = 10;
 
 const thanosImg = new Image();
 thanosImg.src = "../images/thanosgauntlet.png"
 let thanosPosX = 2400;
 let thanosPosY = myCanvas.height /2;
-let thanosWidth = 130;
+let thanosWidth = 100;
 let thanosHeight = 90;
+let thanosSpeed = 10;
 
-function drawScore() {
-  ctx.font = "16px Fira Code";
-  ctx.fillStyle = "#B22222";
-  ctx.fillText("Score: "+score, myCanvas.width / 2, 50);
-}
-
-
-
-// ------------------- GAME VARIABLES
-let gameOver = false;
-let animateId 
-
-const backgroundImgs = () => {
-  ctx.drawImage(backImg2, background1X, 0, myCanvas.width, myCanvas.height);
-  ctx.drawImage(backImg2, background2X, 0, myCanvas.width, myCanvas.height);
-  
-} 
+const gameoverImg = new Image();
+gameoverImg.src = "../images/gameover.jpg"
 
 // ----------------------- DRAWING CHARACTERS 
 const char = () => {
   ctx.drawImage(charImg, charPosX, charPosY, charWidth, charHeight);
 }
-
 const drawaquaman = () => {
   ctx.drawImage(aquamanImg, aquamanPosX, aquamanPosY, aquamanWidth, aquamanHeight);
 }
@@ -118,12 +121,19 @@ const drawthanos = () => {
 }
 
 // ---------------------- WINDOW ON.LOAD
-
+function drawScore() {
+  ctx.font = "16px Fira Code";
+  ctx.fillStyle = "#B22222";
+  ctx.fillText("Score: "+score, myCanvas.width / 2, 50);
+}
 window.onload = () => {
+  introMusic.play();
   document.getElementById('start-button').onclick = () => {
     startGame();
     document.querySelector(".game-intro").style.display = "none";
     document.querySelector("#game-board").style.display = 'block';
+
+    
   };
 }
 // -------------------- ANIMATE -----------------------------
@@ -137,13 +147,15 @@ function animate(){
   drawwonderwoman();
   drawthanos();
   drawScore()
+  console.log(aquamanSpeed)
 
-  aquamanPosX -= 11;
-  batmanPosX -= 11;
-  flashPosX -= 13;
-  supermanPosX -= 13;
-  wonderwomanPosX -= 11;
-  thanosPosX -= 17;
+  
+  aquamanPosX -= aquamanSpeed;
+  batmanPosX -= batmanSpeed;
+  flashPosX -= flashSpeed;
+  supermanPosX -= supermanSpeed;
+  wonderwomanPosX -= wonderwomanSpeed;
+  thanosPosX -= thanosSpeed;
 
 
   background1X -= 3;  
@@ -157,35 +169,36 @@ function animate(){
   }
   
 // --------------------char MOVING LEFT AND RIGHT -------------------
-  if (isMovingLeft) {
+  if (isMovingLeft && charPosX > 20) {
     charPosX -= charSpeed
   }
-  if (isMovingRight) {
+  if (isMovingRight && charPosX < 1000) {
     charPosX += charSpeed
   }
-  if (isMovingUp) {
+  if (isMovingUp && charPosY > 3 ) {
     charPosY -= charSpeed
   }
-  if (isMovingDown) {
+  if (isMovingDown && charPosY < 610) {
     charPosY += charSpeed
-  }
-  if ( charPosX === -myCanvas.width) {
-    charSpeed === 0;
   }
 // -------------------- EnemiesSPAWN && Collision -------------------
 if (aquamanPosX < -200){
+  score += 1
   aquamanPosX = 1800;
   aquamanPosY = getRandomSpawn(700, 1)
 }  
 if (batmanPosX < -300){
+  score += 1
   batmanPosX = 1800;
   batmanPosY = getRandomSpawn(700, 1)
 }
 if (flashPosX < -400){
+  score += 1
   flashPosX = 1800;
   flashPosY = getRandomSpawn(700, 1)
 }
 if (supermanPosX < -700){
+  score += 1
   supermanPosX = 1800;
   supermanPosY = getRandomSpawn(700, 1)
 }
@@ -235,46 +248,58 @@ if (thanosPosX < charPosX + charWidth -50&&
   gameOver = true;
   } 
 
-  if (aquamanPosX < charPosX)  {
-    score += 1;
-  }
-// --------------------GAME OVER -----------------------------------
+
+// --------------------GAME OVER  && PAUSE-----------------------------------
   if (!gameOver){
     animateId = requestAnimationFrame(animate)
   } 
   else {
     cancelAnimationFrame(animateId)
+    ctx.drawImage(gameoverImg, 730, 200, 500, 400)
+    gameMusic.stop();
+    console.log('gameOver')
+ }
+
+
+
+
+// ------------------------- PAUSE ----------------------
+  if (pause === true) {
+    cancelAnimationFrame(animateId);
+    paused()
   }
 }
-
-
-
+function paused(){
+  animateId = requestAnimationFrame(paused)
+  if (pause === false) {
+    cancelAnimationFrame(animateId);
+    animate()
+  }
+}
 
 // ------------------- START GAME -----------------------------------
   function startGame() {
     animate();
+    gameMusic.play();
     console.log("Game Started")
   }
+
+  // -------------- EVENT LISTENERS ------------------------------
   document.addEventListener('keypress', event => {
     if (event.key === 'a') {
-     
-      isMovingLeft = true
+      isMovingLeft = true;
     }
     if (event.key === 'd') {
-      
-      isMovingRight = true
+      isMovingRight = true;
     } 
-    if (event.key === 'd') {
-      
-      isMovingRight = true
-    }
-    if (event.key === 'w') {
-      
-      isMovingUp = true
+    if (event.key === 'w') {   
+      isMovingUp = true;
     }
     if (event.key === 's') {
-      
-      isMovingDown = true
+      isMovingDown = true;
+    }
+    if (event.key === 'm') {
+      gameMusic.pause();
     }
   })
 
@@ -287,11 +312,57 @@ if (thanosPosX < charPosX + charWidth -50&&
 
 document.getElementById('pause-button').onclick = () => {
   if(!pause) {
+  pause = true
+}
+else pause = false;
+}
+document.getElementById('restart-button').onclick = () => {
   cancelAnimationFrame(animateId);
-}
-if(pause) {
-  animateId = requestAnimationFrame(animate)
-}
-}
+score = 0;
+pause = false;
+gameOver = false;
+score = 0;
+pause = false;
+gameOver = false;
+background1X = 0;
+background2X = -myCanvas.width
+charPosX = 50;
+charPosY = myCanvas.height/2 - 30;
+charWidth = 60;
+charHeight = 110;
+isMovingLeft = false
+isMovingRight = false
+isMovingUp = false
+isMovingDown = false
 
+
+aquamanPosX = 2000;
+aquamanPosY = 100;
+aquamanWidth = 150;
+aquamanHeight = 100;
+batmanPosX = 2200;
+batmanPosY = 280;
+batmanWidth = 130;
+batmanHeight = 80;
+flashPosX = 2200;
+flashPosY = -380;
+flashWidth = 120;
+flashHeight = 100;
+supermanPosX = 2300;
+supermanPosY = -380;
+supermanWidth = 150;
+supermanHeight = 100;
+wonderwomanPosX = 2400;
+wonderwomanPosY = -380;
+wonderwomanWidth = 130;
+wonderwomanHeight = 60;
+thanosPosX = 2400;
+thanosPosY = myCanvas.height
+thanosWidth = 100;
+thanosHeight = 90;
+
+
+startGame()
+}
+// ----------------------------------------------------------
 
