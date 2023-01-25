@@ -57,6 +57,7 @@ let aquamanSpeed = 10;
 
 const batmanImg = new Image();
 batmanImg.src = "./images/batman.png"
+batmanImg.alt = "batmanalt"
 let batmanPosX = 2200;
 let batmanPosY = 280;
 let batmanWidth = 130;
@@ -65,6 +66,7 @@ let batmanSpeed = 10;
 
 const flashImg = new Image();
 flashImg.src = "./images/flash.png"
+flashImg.alt = "flashalt"
 let flashPosX = 2200;
 let flashPosY = -380;
 let flashWidth = 120;
@@ -73,6 +75,7 @@ let flashSpeed = 10;
 
 const supermanImg = new Image();
 supermanImg.src = "./images/superman.png"
+supermanImg.alt = "supermanalt"
 let supermanPosX = 2300;
 let supermanPosY = -380;
 let supermanWidth = 150;
@@ -81,6 +84,7 @@ let supermanSpeed = 10;
 
 const wonderwomanImg = new Image();
 wonderwomanImg.src = "./images/wonderwoman.png"
+wonderwomanImg.alt = "wonderwomanalt"
 let wonderwomanPosX = 2400;
 let wonderwomanPosY = -380;
 let wonderwomanWidth = 130;
@@ -89,6 +93,7 @@ let wonderwomanSpeed = 10;
 
 const thanosImg = new Image();
 thanosImg.src = "./images/thanosgauntlet.png"
+thanosImg.alt = "thanosalt"
 let thanosPosX = 2400;
 let thanosPosY = myCanvas.height /2;
 let thanosWidth = 100;
