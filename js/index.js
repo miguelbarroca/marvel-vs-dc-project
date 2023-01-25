@@ -21,9 +21,11 @@ const getRandomSpawn = (min, max) => {
 
 // --------------------------Background IMG (properties)
 const backImg = new Image();
-backImg.src = "../images/background.jpg";
+backImg.src = "./images/background.jpg";
+backImg.alt = "backImgalt"
 const backImg2 = new Image();
-backImg2.src = "../images/background.jpg";
+backImg2.src = "./images/background.jpg";
+backImg2.alt = "backImg2alt"
 let background1X = 0;
 let background2X = -myCanvas.width; 
 const backgroundImgs = () => {
@@ -34,7 +36,8 @@ const backgroundImgs = () => {
 
 // -------------------------- CHAR IMG (properties)
 const charImg = new Image();
-charImg.src = "../images/spiderman.png";
+charImg.src = "./images/spiderman.png";
+charImg.alt = "spidermanalt"
 let charPosX = 50;
 let charPosY = myCanvas.height/2 - 30;
 let charWidth = 60;
@@ -128,7 +131,7 @@ const drawthanos = () => {
 
 // ---------------------- WINDOW ON.LOAD
 function drawScore() {
-  ctx.font = "16px Fira Code";
+  ctx.font = "20px Fira Code";
   ctx.fillStyle = "#B22222";
   ctx.fillText("Score: "+score, myCanvas.width / 2, 50);
 }
