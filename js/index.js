@@ -7,9 +7,9 @@ let score = 0;
 let pause = false;
 let gameOver = false;
 let animateId 
-let introMusic = new Audio("../music/intromusic.wav");
+let introMusic = new Audio("./music/intromusic.wav");
 introMusic.volume = 0.5
-let gameMusic = new Audio("../music/streetsofrage.mp3");
+let gameMusic = new Audio("./music/streetsofrage.mp3");
 gameMusic.volume = 0.2
 
 // ------------------- RANDOMIZER
@@ -74,7 +74,7 @@ let flashPosX = 2200;
 let flashPosY = -380;
 let flashWidth = 120;
 let flashHeight = 100;
-let flashSpeed = 10;
+let flashSpeed = 12;
 
 const supermanImg = new Image();
 supermanImg.src = "./images/superman.png"
@@ -83,7 +83,7 @@ let supermanPosX = 2300;
 let supermanPosY = -380;
 let supermanWidth = 150;
 let supermanHeight = 100;
-let supermanSpeed = 10;
+let supermanSpeed = 12;
 
 const wonderwomanImg = new Image();
 wonderwomanImg.src = "./images/wonderwoman.png"
@@ -101,10 +101,10 @@ let thanosPosX = 2400;
 let thanosPosY = myCanvas.height /2;
 let thanosWidth = 100;
 let thanosHeight = 90;
-let thanosSpeed = 10;
+let thanosSpeed = 14;
 
 const gameoverImg = new Image();
-gameoverImg.src = "./images/gameover.jpg"
+gameoverImg.src = "./images/gameover.png"
 
 // ----------------------- DRAWING CHARACTERS 
 const char = () => {
@@ -141,8 +141,6 @@ window.onload = () => {
     startGame();
     document.querySelector(".game-intro").style.display = "none";
     document.querySelector("#game-board").style.display = 'block';
-
-    
   };
 }
 // -------------------- ANIMATE -----------------------------
@@ -265,7 +263,7 @@ if (thanosPosX < charPosX + charWidth -50&&
   else {
     cancelAnimationFrame(animateId)
     ctx.drawImage(gameoverImg, 730, 200, 500, 400)
-    gameMusic.stop();
+    gameMusic.pause();
     console.log('gameOver')
  }
 
@@ -366,11 +364,9 @@ wonderwomanPosY = -380;
 wonderwomanWidth = 130;
 wonderwomanHeight = 60;
 thanosPosX = 2400;
-thanosPosY = myCanvas.height
+thanosPosY = myCanvas.height;
 thanosWidth = 100;
 thanosHeight = 90;
-
-
 startGame()
 }
 // ----------------------------------------------------------
