@@ -9,6 +9,9 @@ let gameOver = false;
 let animateId 
 let introMusic = new Audio("./music/intromusic.wav");
 introMusic.volume = 0.5
+setTimeout(function(){ 
+  introMusic.play()
+ }, 1);
 let gameMusic = new Audio("./music/streetsofrage.mp3");
 gameMusic.volume = 0.2
 
