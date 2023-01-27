@@ -9,6 +9,7 @@ body {
     font-weight: 500;
     font-family: "Fira Code";
     color: white;
+    margin-top: 10px;
   }
 
   .game-intro span {
@@ -35,7 +36,9 @@ body {
     box-shadow: 0;
     border-radius: 5px;
     margin-bottom: 10px;
+    margin-top: 50px;
     font-family: 'Fira Code';
+    box-shadow: 5px 10px;
   }
   
   
@@ -77,6 +80,6 @@ body {
   }
   
   #deadpool {
-    margin-top: 50px;
+    margin-top: 65px;
     margin-bottom: 15px;
   }
