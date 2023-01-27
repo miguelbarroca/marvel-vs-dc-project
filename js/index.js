@@ -9,11 +9,10 @@ let gameOver = false;
 let animateId 
 let introMusic = new Audio("./music/intromusic.wav");
 introMusic.volume = 0.5
-setTimeout(function(){ 
-  introMusic.play()
- }, 1);
 let gameMusic = new Audio("./music/streetsofrage.mp3");
 gameMusic.volume = 0.2
+let gameOverMusic = new Audio("./music/gameover.wav");
+gameOver.volume = 0.2
 
 // ------------------- RANDOMIZER
 const getRandomSpawn = (min, max) => {
@@ -266,7 +265,8 @@ if (thanosPosX < charPosX + charWidth -50&&
   else {
     cancelAnimationFrame(animateId)
     ctx.drawImage(gameoverImg, 730, 200, 500, 400)
-    gameMusic.pause();
+    gameMusic.pause()
+    gameOverMusic.play();
     console.log('gameOver')
  }
 
